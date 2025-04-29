@@ -22,6 +22,7 @@
         "build:clean": "shx rm -rf ./dist",
         "lint": "npx @biomejs/biome check .",
         "lint:fix": "npx @biomejs/biome check --write .",
+        "changeset": "changeset",
         "local-release": "npm run build && changeset version && changeset publish",
         "release": "npm run build && changeset publish"
     },
