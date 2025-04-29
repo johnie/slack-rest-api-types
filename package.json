@@ -1,0 +1,37 @@
+{
+    "name": "slack-rest-api-types",
+    "version": "1.0.0",
+    "description": "Types for Slack Web API REST endpoints",
+    "license": "MIT",
+    "keywords": [
+        "slack",
+        "web-api",
+        "bot",
+        "client",
+        "http",
+        "api",
+        "types"
+    ],
+    "types": "./dist/index.d.ts",
+    "files": [
+        "dist/**/*"
+    ],
+    "scripts": {
+        "prepare": "npm run build",
+        "build": "npm run build:clean && tsc",
+        "build:clean": "shx rm -rf ./dist",
+        "lint": "npx @biomejs/biome check .",
+        "lint:fix": "npx @biomejs/biome check --write ."
+    },
+    "author": "Johnie Hjelm <johnie@hjelm.im>",
+    "packageManager": "pnpm@10.9.0",
+    "dependencies": {
+        "@slack/web-api": "^7.9.1",
+        "typescript": "^5.8.3"
+    },
+    "devDependencies": {
+        "@tsconfig/recommended": "^1.0.8",
+        "@types/node": "^22.15.3",
+        "shx": "^0.4.0"
+    }
+}

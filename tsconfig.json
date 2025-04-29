@@ -1,0 +1,22 @@
+{
+    "$schema": "https://json.schemastore.org/tsconfig",
+    "compilerOptions": {
+        "declaration": true,
+        "emitDeclarationOnly": true,
+        "outDir": "dist",
+        "composite": true,
+        "strict": true,
+        "skipLibCheck": true,
+        "moduleResolution": "node",
+        "target": "ESNext",
+        "module": "ESNext"
+    },
+    "extends": "@tsconfig/recommended/tsconfig.json",
+    "jsdoc": {
+        "out": "support/jsdoc",
+        "access": "public"
+    },
+    "ts-node": {
+        "esm": true
+    }
+}
