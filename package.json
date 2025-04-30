@@ -1,6 +1,6 @@
 {
     "name": "slack-rest-api-types",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Types for Slack Web API REST endpoints",
     "license": "MIT",
     "keywords": [
