@@ -44,7 +44,7 @@
         "@changesets/changelog-github": "^0.5.1",
         "@changesets/cli": "^2.29.2",
         "@tsconfig/recommended": "^1.0.8",
-        "@types/node": "^22.15.3",
+        "@types/node": "^24.0.1",
         "shx": "^0.4.0"
     }
 }
