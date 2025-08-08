@@ -6,7 +6,7 @@ import type {
   HeaderBlock,
   SectionBlock,
   WebAPICallResult,
-} from '../index';
+} from '@/index';
 
 describe('Utilities and Edge Cases', () => {
   describe('Optional and required fields', () => {
@@ -157,12 +157,12 @@ describe('Utilities and Edge Cases', () => {
     it('should work with generic HTTP client interfaces', () => {
       // Simulate a generic HTTP client
       interface HttpClient {
-        post<T>(url: string, data: any): Promise<T>;
+        post<T>(url: string, data: unknown): Promise<T>;
       }
 
       async function postMessage(
         client: HttpClient,
-        args: ChatPostMessageArguments
+        args: ChatPostMessageArguments,
       ) {
         return client.post('/api/chat.postMessage', args);
       }
