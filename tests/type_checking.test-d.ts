@@ -3,13 +3,12 @@ import type {
   Block,
   ChatPostMessageArguments,
   ChatPostMessageResponse,
-  ConversationsListArguments,
   ConversationsListResponse,
   KnownBlock,
   UsersListArguments,
   UsersListResponse,
   WebAPICallResult,
-} from '../index';
+} from '@/index';
 
 describe('Type Checking', () => {
   describe('Chat API Types', () => {
@@ -70,7 +69,10 @@ describe('Type Checking', () => {
         ok: boolean;
         error?: string;
         warning?: string;
-        response_metadata?: any;
+        response_metadata?: {
+          warnings?: string[];
+          next_cursor?: string;
+        };
       }>();
     });
   });

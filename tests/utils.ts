@@ -1,4 +1,4 @@
-import type { ChatPostMessageResponse } from '../index';
+import type { ChatPostMessageResponse } from '@/index';
 
 export const slackIds = {
   channel: 'C1234567890',

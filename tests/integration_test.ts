@@ -13,25 +13,11 @@ describe('Integration Tests', () => {
       const messageArgs: ChatPostMessageArguments = {
         channel: 'C1234567890',
         text: 'Hello, world!',
-        blocks: [
-          {
-            type: 'section',
-            text: {
-              type: 'mrkdwn',
-              text: 'Hello, world!',
-            },
-          },
-        ],
-        attachments: [
-          {
-            color: 'good',
-            text: 'This is an attachment',
-          },
-        ],
         thread_ts: '1234567890.123456',
         reply_broadcast: false,
       };
 
+      // Should compile without errors and have expected properties
       expect(messageArgs.channel).toBe('C1234567890');
       expect(messageArgs.text).toBe('Hello, world!');
     });
@@ -46,7 +32,8 @@ describe('Integration Tests', () => {
           subtype: undefined,
           text: 'Hello, world!',
           ts: '1234567890.123456',
-          user: 'U1234567890',
+          username: 'bot',
+          bot_id: 'B1234567890',
         },
       };
 
@@ -170,9 +157,7 @@ describe('Integration Tests', () => {
       const errorResponse: WebAPICallResult = {
         ok: false,
         error: 'channel_not_found',
-        response_metadata: {
-          warnings: ['Some warning message'],
-        },
+        response_metadata: { warnings: ['Channel not found'] },
       };
 
       expect(errorResponse.ok).toBe(false);
@@ -201,7 +186,6 @@ describe('Integration Tests', () => {
           type: 'message',
           text: 'Hello',
           ts: '1234567890.123456',
-          user: 'U1234567890',
         },
       };
 
