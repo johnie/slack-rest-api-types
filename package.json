@@ -49,7 +49,7 @@
         "@changesets/cli": "^2.29.5",
         "@slack/types": "^2.15.0",
         "@tsconfig/recommended": "^1.0.10",
-        "@types/node": "^22.17.0",
+        "@types/node": "^24.2.1",
         "shx": "^0.4.0",
         "vitest": "^3.2.4"
     }
