@@ -1,5 +1,11 @@
 # slack-rest-api-types
 
+## 1.1.1
+
+### Patch Changes
+
+- [#16](https://github.com/johnie/slack-rest-api-types/pull/16) [`20cc542`](https://github.com/johnie/slack-rest-api-types/commit/20cc542a98728afacacc7b9780dba8fdb903bf93) Thanks [@dependabot](https://github.com/apps/dependabot)! - deps: bump the dependencies group with 3 updates
+
 ## 1.1.0
 
 ### Minor Changes
