@@ -39,17 +39,17 @@
     },
     "homepage": "https://github.com/johnie/slack-rest-api-types#readme",
     "dependencies": {
-        "@slack/web-api": "^7.9.3",
+        "@slack/web-api": "^7.10.0",
         "typescript": "^5.9.2"
     },
     "devDependencies": {
         "@arethetypeswrong/cli": "^0.18.2",
-        "@biomejs/biome": "^2.1.4",
+        "@biomejs/biome": "^2.2.2",
         "@changesets/changelog-github": "^0.5.1",
-        "@changesets/cli": "^2.29.5",
-        "@slack/types": "^2.15.0",
+        "@changesets/cli": "^2.29.6",
+        "@slack/types": "^2.16.0",
         "@tsconfig/recommended": "^1.0.10",
-        "@types/node": "^24.2.1",
+        "@types/node": "^24.3.0",
         "shx": "^0.4.0",
         "vitest": "^3.2.4"
     }
