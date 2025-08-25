@@ -151,7 +151,7 @@ describe('Utilities and Edge Cases', () => {
       const deserialized = JSON.parse(serialized) as ChatPostMessageArguments;
 
       expect(deserialized.channel).toBe(args.channel);
-      expect(deserialized.text).toBe(args.text);
+      expect(deserialized.thread_ts).toBe(args.thread_ts);
     });
 
     it('should work with generic HTTP client interfaces', () => {
@@ -162,7 +162,7 @@ describe('Utilities and Edge Cases', () => {
 
       async function postMessage(
         client: HttpClient,
-        args: ChatPostMessageArguments,
+        args: ChatPostMessageArguments
       ) {
         return client.post('/api/chat.postMessage', args);
       }

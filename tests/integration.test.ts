@@ -33,7 +33,9 @@ describe('Integration Tests', () => {
       };
 
       expect(messageArgs.channel).toBe('C1234567890');
-      expect(messageArgs.text).toBe('Hello, world!');
+      expect('text' in messageArgs ? messageArgs.text : undefined).toBe(
+        'Hello, world!'
+      );
     });
 
     it('should work with chat.postMessage response data', () => {
