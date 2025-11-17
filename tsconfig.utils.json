@@ -1,0 +1,14 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "declaration": true,
+    "declarationMap": true,
+    "emitDeclarationOnly": false,
+    "outDir": "dist/utils",
+    "rootDir": "src/utils",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "target": "ES2020"
+  },
+  "include": ["src/utils/**/*"]
+}
