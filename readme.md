@@ -2,7 +2,7 @@
 
 [![NPM Version](https://img.shields.io/npm/v/slack-rest-api-types.svg)](https://www.npmjs.com/package/slack-rest-api-types) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![TypeScript](https://img.shields.io/badge/TypeScript-Ready-blue.svg)](https://www.typescriptlang.org/) [![npm downloads](https://img.shields.io/npm/dm/slack-rest-api-types.svg)](https://www.npmjs.com/package/slack-rest-api-types)
 
-> Lightweight TypeScript type definitions for Slack Web API REST endpoints and tools.
+> Lightweight TypeScript types and runtime utilities for Slack Web API REST endpoints.
 
 ## Why slack-rest-api-types?
 
@@ -178,9 +178,142 @@ async function safeSendMessage(messageData: ChatPostMessageArguments) {
 }
 ```
 
+## Runtime Utilities
+
+In addition to types, this package provides optional runtime utility functions for common Slack API patterns. Import them separately to keep your bundle size minimal:
+
+```typescript
+import {
+  isSuccessResponse,
+  isErrorResponse,
+  hasNextPage,
+  extractCursor,
+  isKnownBlock,
+} from 'slack-rest-api-types/utils';
+```
+
+### Type Guards
+
+Safely narrow response types and handle errors:
+
+```typescript
+import { isSuccessResponse, isErrorResponse, isMissingScope } from 'slack-rest-api-types/utils';
+import type { ChatPostMessageResponse } from 'slack-rest-api-types';
+
+const response: ChatPostMessageResponse = await sendMessage();
+
+if (isSuccessResponse(response)) {
+  console.log('Message sent:', response.ts);
+  console.log('Channel:', response.channel);
+} else if (isMissingScope(response)) {
+  console.error('Missing scope:', response.needed);
+} else {
+  console.error('Error:', response.error);
+}
+```
+
+**Available type guards:**
+- `isSuccessResponse(response)` - Check if `ok === true`
+- `isErrorResponse(response)` - Check if `ok === false`
+- `isRateLimited(response)` - Check for rate limiting
+- `isMissingScope(response)` - Check for missing permissions
+- `isAuthError(response)` - Check for authentication errors
+
+### Pagination Helpers
+
+Handle cursor and offset-based pagination:
+
+```typescript
+import { hasNextPage, extractCursor } from 'slack-rest-api-types/utils';
+import type { ConversationsListResponse } from 'slack-rest-api-types';
+
+async function getAllChannels() {
+  const allChannels = [];
+  let cursor: string | undefined;
+
+  do {
+    const response: ConversationsListResponse = await fetch(
+      `https://slack.com/api/conversations.list?cursor=${cursor || ''}`
+    ).then(r => r.json());
+
+    if (isSuccessResponse(response)) {
+      allChannels.push(...response.channels);
+      cursor = hasNextPage(response) ? extractCursor(response) : undefined;
+    }
+  } while (cursor);
+
+  return allChannels;
+}
+```
+
+**Available pagination helpers:**
+- `hasNextPage(response)` - Check if more pages exist (cursor-based)
+- `extractCursor(response)` - Get the next cursor
+- `hasCursor(response)` - Type guard for cursor pagination
+- `hasMorePages(response)` - Check for more pages (offset-based)
+- `hasOffsetPaging(response)` - Type guard for offset pagination
+- `getTotalCount(response)` - Get total item count
+
+### Block Kit Utilities
+
+Validate and work with Slack Block Kit:
+
+```typescript
+import { isBlock, isKnownBlock, isSectionBlock } from 'slack-rest-api-types/utils';
+
+const maybeBlock = { type: 'section', text: { type: 'mrkdwn', text: 'Hello' } };
+
+if (isKnownBlock(maybeBlock)) {
+  // TypeScript knows this is a valid Slack block
+  console.log('Block type:', maybeBlock.type);
+}
+
+const blocks = [
+  { type: 'section', text: { type: 'mrkdwn', text: 'Section 1' } },
+  { type: 'divider' },
+  { type: 'section', text: { type: 'mrkdwn', text: 'Section 2' } },
+];
+
+// Filter and process specific block types
+blocks.filter(isSectionBlock).forEach(block => {
+  console.log('Section text:', block.text?.text);
+});
+```
+
+**Available block utilities:**
+- `isBlock(value)` - Check if value is a Block
+- `isKnownBlock(value)` - Check if value is a KnownBlock
+- `isSectionBlock(block)` - Type guard for section blocks
+- `isActionsBlock(block)` - Type guard for actions blocks
+- `isDividerBlock(block)` - Type guard for divider blocks
+- `isHeaderBlock(block)` - Type guard for header blocks
+- `isImageBlock(block)` - Type guard for image blocks
+- `isContextBlock(block)` - Type guard for context blocks
+- `isInputBlock(block)` - Type guard for input blocks
+- `validateBlocks(blocks)` - Validate array of blocks
+- `filterKnownBlocks(blocks)` - Filter to known block types
+
 ## Available Types
 
 This package exports all request and response types from the official Slack Web API
+
+### Type Categories
+
+**Chat & Messaging**: `ChatPostMessage`, `ChatUpdate`, `ChatDelete`, `ChatScheduleMessage`, etc.
+
+**Conversations**: `ConversationsList`, `ConversationsCreate`, `ConversationsInfo`, `ConversationsMembers`, etc.
+
+**Users**: `UsersList`, `UsersInfo`, `UsersProfile`, `UsersSetPresence`, etc.
+
+**Files**: `FilesUploadV2`, `FilesInfo`, `FilesList`, `FilesDelete`, etc.
+
+**Reactions**: `ReactionsAdd`, `ReactionsRemove`, `ReactionsGet`, etc.
+
+**Admin API**: `AdminTeamsList`, `AdminUsersAssign`, `AdminAppsApprove`, etc.
+
+**Block Kit**: `Block`, `KnownBlock`, `SectionBlock`, `ActionsBlock`, `Button`, `Select`, etc.
+
+**And many more...** covering all Slack Web API methods!
 
 ### From Custom Types
 
