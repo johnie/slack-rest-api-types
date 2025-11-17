@@ -19,13 +19,11 @@
         },
         "./utils": {
             "types": "./dist/utils/index.d.ts",
-            "require": "./dist/utils/index.js",
-            "import": "./dist/utils/index.js",
-            "default": "./dist/utils/index.js"
+            "import": "./dist/utils/index.js"
         }
     },
     "engines": {
-        "node": ">=16"
+        "node": ">=22"
     },
     "files": [
         "dist/**/*"
@@ -41,7 +39,7 @@
         "test:watch": "vitest",
         "format": "biome format --write ./src",
         "check-format": "biome check --write ./src",
-        "check-exports": "attw --pack .",
+        "check-exports": "attw --pack --profile esm-only .",
         "local-release": "$npm_execpath run ci && changeset version && changeset publish",
         "release": "$npm_execpath run ci && changeset publish"
     },
