@@ -1,7 +1,7 @@
 {
     "name": "slack-rest-api-types",
     "version": "1.1.2",
-    "description": "Types for Slack Web API REST endpoints",
+    "description": "TypeScript types and utilities for Slack Web API REST endpoints",
     "license": "MIT",
     "keywords": [
         "slack",
@@ -12,20 +12,34 @@
         "api",
         "types"
     ],
-    "types": "./dist/src/index.d.ts",
+    "types": "./dist/index.d.ts",
+    "exports": {
+        ".": {
+            "types": "./dist/index.d.ts"
+        },
+        "./utils": {
+            "types": "./dist/utils/index.d.ts",
+            "import": "./dist/utils/index.js"
+        }
+    },
+    "engines": {
+        "node": ">=22"
+    },
     "files": [
         "dist/**/*"
     ],
     "scripts": {
         "prepare": "npm run build",
-        "build": "npm run build:clean && tsc",
+        "build": "npm run build:clean && npm run build:types && npm run build:utils",
+        "build:types": "tsc",
+        "build:utils": "tsc --project tsconfig.utils.json",
         "build:clean": "shx rm -rf ./dist",
         "ci": "$npm_execpath run build && $npm_execpath run check-format && $npm_execpath run check-exports && $npm_execpath run test",
         "test": "vitest run",
         "test:watch": "vitest",
         "format": "biome format --write ./src",
         "check-format": "biome check --write ./src",
-        "check-exports": "attw --pack .",
+        "check-exports": "attw --pack --profile esm-only .",
         "local-release": "$npm_execpath run ci && changeset version && changeset publish",
         "release": "$npm_execpath run ci && changeset publish"
     },
@@ -39,18 +53,18 @@
     },
     "homepage": "https://github.com/johnie/slack-rest-api-types#readme",
     "dependencies": {
-        "@slack/web-api": "^7.10.0",
-        "typescript": "^5.9.2"
+        "@slack/types": "^2.18.0",
+        "@slack/web-api": "^7.12.0"
     },
     "devDependencies": {
         "@arethetypeswrong/cli": "^0.18.2",
-        "@biomejs/biome": "^2.2.2",
+        "@biomejs/biome": "^2.3.5",
         "@changesets/changelog-github": "^0.5.1",
-        "@changesets/cli": "^2.29.6",
-        "@slack/types": "^2.16.0",
-        "@tsconfig/recommended": "^1.0.10",
-        "@types/node": "^24.3.0",
+        "@changesets/cli": "^2.29.7",
+        "@tsconfig/recommended": "^1.0.13",
+        "@types/node": "^24.10.1",
         "shx": "^0.4.0",
-        "vitest": "^4.0.3"
+        "typescript": "^5.9.3",
+        "vitest": "^4.0.9"
     }
 }

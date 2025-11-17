@@ -8,39 +8,39 @@ importers:
 
   .:
     dependencies:
+      '@slack/types':
+        specifier: ^2.18.0
+        version: 2.18.0
       '@slack/web-api':
-        specifier: ^7.10.0
+        specifier: ^7.12.0
         version: 7.12.0
-      typescript:
-        specifier: ^5.9.2
-        version: 5.9.3
     devDependencies:
       '@arethetypeswrong/cli':
         specifier: ^0.18.2
         version: 0.18.2
       '@biomejs/biome':
-        specifier: ^2.2.2
+        specifier: ^2.3.5
         version: 2.3.5
       '@changesets/changelog-github':
         specifier: ^0.5.1
         version: 0.5.1
       '@changesets/cli':
-        specifier: ^2.29.6
+        specifier: ^2.29.7
         version: 2.29.7(@types/node@24.10.1)
-      '@slack/types':
-        specifier: ^2.16.0
-        version: 2.18.0
       '@tsconfig/recommended':
-        specifier: ^1.0.10
+        specifier: ^1.0.13
         version: 1.0.13
       '@types/node':
-        specifier: ^24.3.0
+        specifier: ^24.10.1
         version: 24.10.1
       shx:
         specifier: ^0.4.0
         version: 0.4.0
+      typescript:
+        specifier: ^5.9.3
+        version: 5.9.3
       vitest:
-        specifier: ^4.0.3
+        specifier: ^4.0.9
         version: 4.0.9(@types/node@24.10.1)
 
 packages:
