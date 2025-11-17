@@ -44,7 +44,7 @@ Thank you for your interest in contributing to `slack-rest-api-types`! We apprec
    # or
    npm run test
    ```
-6. **Format Code**: Use Prettier to format code according to the project style:
+6. **Format Code**: Use Biome to format code according to the project style:
    ```bash
    pnpm format
    # or
@@ -53,12 +53,50 @@ Thank you for your interest in contributing to `slack-rest-api-types`! We apprec
 
 ## Code Guidelines
 
-1. **Coding Style**: Please adhere to the project's coding style. We use Prettier to enforce code formatting consistently across the codebase.
+1. **Coding Style**: Please adhere to the project's coding style. We use Biome to enforce code formatting and linting consistently across the codebase.
 2. **Commit Messages**: Write clear, concise commit messages. Follow the convention: `type(scope): description [skip ci] [optional body] [optional footer(s)]`
    - `type` can be `fix`, `feat`, `docs`, `style`, etc.
    - `scope` is optional and may relate to the specific part of the module you are working on.
 3. **Add Tests**: Tests are important to ensure the stability of the code. Please add or update tests for any code changes.
 4. **Documentation**: Ensure any new features or changes are reflected in the documentation. Update doc comments within the code as necessary.
+
+## Contributing Utility Functions
+
+When adding runtime utilities to the `src/utils/` directory, please follow these guidelines:
+
+1. **Keep utilities pure**: Functions should be stateless and have no side effects.
+2. **Type safety first**: All utilities should provide strong type guarantees and narrow types where possible.
+3. **Add JSDoc comments**: Include detailed documentation with `@param`, `@returns`, and `@example` tags.
+4. **Test thoroughly**: Add comprehensive tests for all utilities, including edge cases.
+5. **Import from source**: Import types from `@slack/types` or `@slack/web-api` directly, not from `../index`.
+6. **Bundle size awareness**: Keep utilities lightweight and tree-shakeable.
+
+### Example Utility Structure
+
+```typescript
+import type { WebAPICallResult } from '@slack/web-api';
+
+/**
+ * Brief description of what this function does.
+ *
+ * @param param1 - Description of parameter
+ * @returns Description of return value
+ *
+ * @example
+ * ```typescript
+ * const result = myUtility(input);
+ * if (result) {
+ *   console.log('Success');
+ * }
+ * ```
+ */
+export function myUtility<T extends WebAPICallResult>(
+	param1: T
+): boolean {
+	// Implementation
+	return param1.ok === true;
+}
+```
 
 ## Reporting a Bug
 
